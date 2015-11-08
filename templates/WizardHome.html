@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    </head>
+    <style type="text/css">
+        .post-content {
+            top:0;
+            left:0;
+            position: absolute;
+        }
+
+        .thumbnail{
+            position:relative;
+
+        }
+    </style>
+    <body>
+        <div id="row1" class="row">
+            {% for prog in Programs %}
+                <div class="col-sm-6 col-md-2">
+                    <div class="thumbnail">
+                        <!--<img src="http://photos4.meetupstatic.com/photos/event/b/2/e/0/global_330165792.jpeg" alt="DVDC">-->
+                        <img src="{{ prog.img }}" alt="{{ prog.name }}">
+                        <div class="caption post-content">
+                            <h3>{{ prog.title }}</h3>
+                            <p>Experience Data</p>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>
