@@ -12,7 +12,7 @@ from logging import FileHandler
 # from config import Config
 from environment import *
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 app.config.from_object(__name__)
 # env = Config()
 # env.init_app(app,env_file=".env")
@@ -74,9 +74,15 @@ def handle_internal_error(err):
 @app.route(ROOT)
 def Choose_Sponsor():
 
-    Programs = [{"title":"Data Viz DC","initialism":"DVDC","img":"http://photos4.meetupstatic.com/photos/event/b/2/e/0/global_330165792.jpeg"},
-                {"title":"DC2 Digital Nomads","initialism":"DC2DN","img":"http://photos2.meetupstatic.com/photos/event/2/0/c/8/global_333188392.jpeg"}
-                ]
+    Programs = [{"title":"Data Viz DC","initialism":"DVDC","img":"http://photos4.meetupstatic.com/photos/event/b/2/e/0/global_330165792.jpeg","url":"http://www.meetup.com/Data-Visualization-DC"},
+                {"title":"DC2 Digital Nomads","initialism":"DC2DN","img":"http://photos2.meetupstatic.com/photos/event/2/0/c/8/global_333188392.jpeg","url":"http://www.meetup.com/dcnightowls"},
+                {"title":"Data Science DC","initialism":"DSDC","img":"http://photos3.meetupstatic.com/photos/event/5/3/4/a/global_393021322.jpeg","url":"http://www.meetup.com/Data-science-DC"},
+                {"title":"Data Education DC","initialism":"DEDC","img":"http://photos4.meetupstatic.com/photos/event/c/5/5/global_434463157.jpeg","url":"http://www.meetup.com/Data-Education-DC"},
+                {"title":"Women Data Scientists DC","initialism":"WDSDC","img":"http://photos3.meetupstatic.com/photos/event/5/3/4/a/global_393021322.jpeg","url":"http://www.meetup.com/WomenDataScientistsDC/"},
+                {"title":"Data Innovation DC","initialism":"DIDC","img":"http://photos2.meetupstatic.com/photos/event/4/1/7/a/global_416596762.jpeg","url":"http://www.meetup.com/Data-business-DC"},
+                {"title":"Statistical Programming DC","initialism":"SPDC","img":"http://photos4.meetupstatic.com/photos/event/9/e/c/5/global_441340645.jpeg","url":"http://www.meetup.com/stats-prog-dc"},
+                {"title":"Data Wranglers DC","initialism":"DWDC","img":"http://photos2.meetupstatic.com/photos/event/b/4/2/a/global_418006122.jpeg","url":"http://www.meetup.com/Data-wranglers-dc"}
+            ]
     # return render_template("test.html")
     return render_template( "WizardHome.html",Programs=Programs)
 
