@@ -175,3 +175,29 @@ function Pinterest($, window, document, undefined) {
 
 }
 //)(jQuery, window, document);
+
+
+function ProgramSelect() {
+    var programs_selected = {},
+        num_programs = 0,
+        sponsorship_duration = 0,
+        sponsorship_level = 0;
+    $("article.white-panel").click(function(prog) {
+        var id = String(prog.currentTarget.id);
+        if (programs_selected[id]!=true) {
+            programs_selected[id] = true;
+            $(this).addClass("program-selected");
+        }
+        else if (programs_selected[id]==true) {
+            programs_selected[id] = false;
+            $(this).removeClass("program-selected");
+        };
+
+        //programs = Object.keys(programs_selected);
+        //var num_programs = 0;
+        //for (P in programs_selected) {if (programs_selected[P]) {num_programs +=1}};
+        sponsorship_duration = 3;
+        sponsorship_level = 'normal';
+        getCost(programs_selected,sponsorship_duration,sponsorship_level);
+    });
+}

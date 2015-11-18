@@ -1,0 +1,13 @@
+
+.dc2_title {
+    font-size: 60px;
+    font-family: 'Agency FB', arial;
+    color: #045681;
+    font-weight: bold;
+    text-align: center;
+    display:block;
+}
+
+.select-options {
+    display: none;
+}
