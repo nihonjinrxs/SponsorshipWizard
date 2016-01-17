@@ -8,9 +8,12 @@ import traceback
 import urllib, urllib2
 import logging
 from logging import FileHandler
-# from flask.ext.dotenv import DotEnv
-# from config import Config
-from environment import *
+from config import config
+
+if len(sys.argv) > 1:
+    CONFIG_NAME = sys.argv[1].strip().lower()
+else:
+    CONFIG_NAME = 'sandbox'
 
 Programs = [
     {"title":"Data Viz DC","initialism":"DVDC","img":"http://photos4.meetupstatic.com/photos/event/b/2/e/0/global_330165792.jpeg","url":"http://www.meetup.com/Data-Visualization-DC"},
@@ -31,14 +34,12 @@ Sponsor_Level = [
 ORG_SPONSOR_THRESHOLD = 5e3
 
 app = Flask(__name__, static_url_path='/static')
-app.config.from_object(__name__)
-# env = Config()
-# env.init_app(app,env_file=".env")
-# print env
-# app.config.from_object(Config["DC2Sponsor_config"])
+current_config = config[CONFIG_NAME].init_app(app)
+app.config.from_object(current_config)
 
-HANDLER = FileHandler(LOGFILE)
-HANDLER.setLevel(logging.INFO)
+HANDLER = FileHandler(app.config['LOGFILE'])
+HANDLER.setLevel(logging.DEBUG)
+#HANDLER.setLevel(logging.INFO)
 app.logger.addHandler(HANDLER)
 
 ERROR_MESSAGES = {404: "The requested resource cannot be found. What did you do!",
@@ -149,8 +150,5 @@ def Calc_OrgSponsor_Percent(total_cost,num_programs,sponsorship_level,sponsorshi
     return org_sponsor, org_sponsor_pcnt
 
 if __name__ == '__main__':
-    #handler = RotatingFileHandler(LOGFILE, maxBytes=1024*1024, backupCount=10)
-    handler = FileHandler(LOGFILE)
-    handler.setLevel(logging.INFO)
-    app.logger.addHandler(handler)
-    app.run(host='0.0.0.0', port=FLASKPORT)
+    #handler = RotatingFileHandler(app.config['LOGFILE'], maxBytes=1024*1024, backupCount=10)
+    app.run(host='0.0.0.0', port=app.config['FLASKPORT'])
