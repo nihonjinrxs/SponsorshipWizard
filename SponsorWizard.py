@@ -80,7 +80,7 @@ def handle_internal_error(err):
                                      exc_traceback)
     exc = ''.join(exc)
     error_message = {
-           "to": SUPPORTEMAIL,
+           "to": app.config['SUPPORTEMAIL'],
            "from": "info@datacommunitydc.org",
            "subject": "Sponsor Wizard Error",
            "text": "An error ocurred in the Sponsor Wizard: \n\nENDPOINT: " \
